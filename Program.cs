@@ -13,7 +13,7 @@ void carLogin(string brand, string type, string color, string licencePlate)
     File.AppendAllText("appData.csv", $"C;{most};{brand};{type};{color};{licencePlate}\n");
 }
 
-void serchInData(int mode, string kifejezes)
+void serchInData(int mode, string expression)
 {
     if (!File.Exists("appData.csv"))
     {
@@ -21,23 +21,23 @@ void serchInData(int mode, string kifejezes)
         return;
     }
 
-    string[] sorok = File.ReadAllLines("appData.csv");
-    bool vanTalalat = false;
-    string keresett = kifejezes.Trim().ToLower();
+    string[] lines = File.ReadAllLines("appData.csv");
+    bool isResult = false;
+    string searched = expression.Trim().ToLower();
 
-    foreach (string sor in sorok)
+    foreach (string line in lines)
     {
-        if (string.IsNullOrWhiteSpace(sor)) continue;
+        if (string.IsNullOrWhiteSpace(line)) continue;
 
-        string[] m = sor.Split(';');
+        string[] m = line.Split(';');
 
         // Személy rögzítés: P;Időpont;Név;Igazolványszám (min. 4 mező)
         if (mode == 1 && m[0] == "P" && m.Length >= 4)
         {
-            if (m[2].ToLower().Contains(keresett))
+            if (m[2].ToLower().Contains(searched))
             {
                 Console.WriteLine($"[SZEMÉLY] Dátum: {m[1]} | Név: {m[2]} | Ig. szám: {m[3]}");
-                vanTalalat = true;
+                isResult = true;
             }
         }
         // Jármű rögzítés: C;Időpont;Márka;Típus;Szín;Rendszám (min. 6 mező)
@@ -45,19 +45,19 @@ void serchInData(int mode, string kifejezes)
         {
             bool talalat = false;
 
-            if (mode == 2 && m[5].ToLower().Contains(keresett)) talalat = true; // Rendszám
-            else if (mode == 3 && m[3].ToLower().Contains(keresett)) talalat = true; // Típus
-            else if (mode == 4 && m[2].ToLower().Contains(keresett)) talalat = true; // Márka
+            if (mode == 2 && m[5].ToLower().Contains(searched)) talalat = true; // Rendszám
+            else if (mode == 3 && m[3].ToLower().Contains(searched)) talalat = true; // Típus
+            else if (mode == 4 && m[2].ToLower().Contains(searched)) talalat = true; // Márka
 
             if (talalat)
             {
                 Console.WriteLine($"[JÁRMŰ]  Dátum: {m[1]} | Márka: {m[2]} | Típus: {m[3]} | Szín: {m[4]} | Rendszám: {m[5]}");
-                vanTalalat = true;
+                isResult = true;
             }
         }
     }
 
-    if (!vanTalalat)
+    if (!isResult)
     {
         Console.WriteLine("A megadott feltételekkel nem található bejegyzés.");
     }
