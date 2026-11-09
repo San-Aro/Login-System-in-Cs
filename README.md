@@ -30,7 +30,7 @@ A szoftver felváltja a hagyományos, papíralapú porta-naplókat:
 ## 💻 Rendszerkövetelmények és Indítás
 
 - **Operációs rendszer:** Windows, macOS vagy Linux.
-- **Környezet:** .NET SDK (6.0 vagy újabb).
+- **Környezet:** .NET SDK (10.0).
 
 ### Indítás lépései:
 1. Nyisson meg egy terminált vagy parancssort a projekt mappájában.
