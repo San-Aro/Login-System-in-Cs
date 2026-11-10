@@ -1,4 +1,4 @@
-# Beléptető Rendszer — Felhasználói Útmutató 
+# Beléptető Rendszer
 
 A **Beléptető Rendszer** egy egyszerűen kezelhető, konzolos felületű szoftver, amelyet portaszolgálatok, telephelyek és védett objektumok számára fejlesztettünk ki. A program segítségével digitálisan rögzíthető a személyi- és járműforgalom, valamint az adatok bármikor visszakereshetők.
 
